@@ -17,8 +17,8 @@ public class StringProducerService {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessageString(String message) {
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("str-topic", message);
-        future.whenComplete((result, ex) -> {
+       kafkaTemplate.send("str-topic", message)
+        .whenComplete((result, ex) -> {
             if (ex == null) {
                 log.info("Partition {}, offset {}", result.getRecordMetadata().partition(), result.getRecordMetadata().offset());
                 log.info("Sent message with successfully {}", result.getProducerRecord().value());

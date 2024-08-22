@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class StrConsumerListener {
 
     @KafkaListener(groupId = "group-1", topics = "str-topic", containerFactory = "strContainerFactory")
-    public void listener(String message){
+    public void create(String message){
        log.info("Receive message {}", message);
     }
 
