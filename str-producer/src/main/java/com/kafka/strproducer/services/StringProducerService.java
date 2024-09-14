@@ -22,6 +22,7 @@ public class StringProducerService {
             } else {
                 log.error("Error sending message", ex);
             }
+
         });
     }
 }

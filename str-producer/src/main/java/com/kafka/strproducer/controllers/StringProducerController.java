@@ -17,9 +17,10 @@ public class StringProducerController {
     private final StringProducerService producerService;
 
     @PostMapping
-    public ResponseEntity<?> SendMessageString(@RequestBody String message) {
+    public ResponseEntity<String> SendMessageString(@RequestBody String message) {
         producerService.sendMessageString(message);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 
 }
