@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
 @Log4j2
@@ -19,10 +20,15 @@ public class StrConsumerListener {
         log.info("CREATE FLOW ::: Receive message {}", message);
     }
 
-    @KafkaListener(groupId = "group-2", topicPartitions = {@TopicPartition(topic = "str-topic", partitions = {"1"})},
+    @KafkaListener(groupId = "group-2", topicPartitions = {@TopicPartition(topic = "str-topic", partitions = {"1"}),},
             containerFactory = "strContainerFactory")
-    public void createApproved(String message) {
-        log.info("CREATE APPROVED ::: Receive message {}", message);
+    public void createApproved(String message, Acknowledgment ack) {
+        try {
+            log.info("CREATE APPROVED ::: Receive message {}", message);
+             ack.acknowledge();
+        } catch (Exception e) {
+            log.error(e);
+        }
     }
 
     @SneakyThrows

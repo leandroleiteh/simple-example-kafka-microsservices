@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ErrorCustomHandler implements KafkaListenerErrorHandler {
+
     @Override
     public Object handleError(Message<?> message, ListenerExecutionFailedException exception) {
         log.info("EXCEPTION_HANDLER ::: foi capturada pelo ErrorHandler" + exception.getLocalizedMessage().length());
