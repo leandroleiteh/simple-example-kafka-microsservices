@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -35,6 +33,27 @@ services:
       - "19000:9000"
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
+
+  payment:
+    image: leandroleiteh/payment-service:1.0.1        
+    networks:
+    - broker-kafka
+    depends_on:
+      - kafka
+    ports:
+      - "8000:8000"
+    environment:
+      KAFKA_HOST: kafka:29092
+
+  json-consumer:
+    image: leandroleiteh/json-consummer:1.0.1        
+    networks:
+    - broker-kafka
+    depends_on:
+      - kafka
+      - payment
+    environment:
+      KAFKA_HOST: kafka:29092
 
 networks:
   broker-kafka:
