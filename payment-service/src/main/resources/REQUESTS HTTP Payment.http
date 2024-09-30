@@ -1,0 +1,11 @@
+### GET request to example server
+POST http://localhost:8000/payments
+Content-Type: application/json
+
+{
+  "id": 10,
+  "idUser": 123,
+  "idProduct": 221,
+  "cardNumber": "4586-5456-2554"
+}
+###
